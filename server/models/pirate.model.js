@@ -11,27 +11,31 @@ const PirateSchema = new mongoose.Schema({
         required: [true, "Number of treasures is required"],
         minlength: [3, "description must be at least 5 characters"]
     },
+    catchPhrase:{
+        type: String,
+        required: [true,"Pirate Catch Phrases is required"]
+    },
     crewPosition: {
         type: String,
         required: [true, "Select any crew position"]
     },
-    signs: {
-        pegLeg:{
-            type: Boolean,
-            required: [true]
-        },
-        eyePatch:{
-            type: Boolean,
-            required: [true]
-        },
-        hookHand:{
-            type: Boolean,
-            required: [true]
-        }
+    
+    pegLeg:{
+        type: Boolean,
+        required: [true]
+    },
+    eyePatch:{
+        type: Boolean,
+        required: [true]
+    },
+    hookHand:{
+        type: Boolean,
+        required: [true]
+    }
         
         
     
-    }
+    
 }, { timestamps: true });
 
 const Pet = mongoose.model("Pirate", PirateSchema);

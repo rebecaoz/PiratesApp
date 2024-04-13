@@ -1,4 +1,4 @@
-import "./MainPage.style.css"
+//import "./MainPage.style.css"
 import ListPirates from "../../components/ListPirates/ListPirates.component";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -31,12 +31,16 @@ const MainPage = (props) => {
         
     },[])
 
+    const Ir = () =>{
+        navigate("/new");
+    }
+
 
     return <div className="content">
         
         <div>
             <h1>Pirates Crew</h1>
-            <button onClick={navigate("/new")}>Add a Pirate</button>
+            <button onClick={Ir}>Add Pirate</button>
         </div>
         
         <div>
