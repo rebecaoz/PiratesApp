@@ -22,15 +22,15 @@ const PirateSchema = new mongoose.Schema({
     
     pegLeg:{
         type: Boolean,
-        required: [true]
+        default: true
     },
     eyePatch:{
         type: Boolean,
-        required: [true]
+        default: true
     },
     hookHand:{
         type: Boolean,
-        required: [true]
+        default: true   
     }
         
         

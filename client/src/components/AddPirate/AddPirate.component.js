@@ -1,32 +1,17 @@
 import axios from "axios"
 import { useState } from "react"
+import { useNavigate} from "react-router-dom";
 
 const AddPirate = () =>{
     const [data, setData] = useState({})
-    const [name, setName] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
-    const [numOfTreasures, setNumOfTreasures] = ("")
-    const [catchPhrase, setCathPhrase] = ("")
-    const [crewPosition, setCrewPostion] = ("")
-    const [pegLeg, setPegLeg] = (false)
-    const [eyePatch, setEyePatch] = (false)
-    const [hookHand, setHookHand] = (false)
+    const navigate = useNavigate();
     
 
     const handleChange = (event) => {
-        /*
         setData({
             ...data,
             [event.target.name]: event.target.value
-        })*/
-        setName({[event.target.name]: event.target.value})
-        setImageUrl({[event.target.name]: event.target.value})
-        setNumOfTreasures({[event.target.name]: event.target.value})
-        setCathPhrase({[event.target.name]: event.target.value})
-        setCrewPostion({[event.target.name]: event.target.value})
-        setPegLeg({[event.target.name]: event.target.checked})
-        setEyePatch({[event.target.name]: event.target.checked})
-        setHookHand({[event.target.name]: event.target.checked})
+        })
     }
 
     const createPirate = (data) => {
@@ -44,6 +29,13 @@ const AddPirate = () =>{
         
     }
 
+    const handleCheckbox = (event) => {
+        setData({
+            ...data,
+            [event.target.name]: event.target.checked
+        })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         createPirate(data)
@@ -52,11 +44,10 @@ const AddPirate = () =>{
     }
 
     
-
-
     return <div>
         <div>
-            <h2 className="text-center">Know a pet needing a home</h2>
+            <h2 className="text-center">Add Pirate</h2>
+            <button onClick={()=>navigate(-1)}>Crew Board</button>
         </div>
         <div className="pd-5">
             <form action="" onSubmit={handleSubmit}>
@@ -117,15 +108,15 @@ const AddPirate = () =>{
                 </div>
                 <div>
                     <div>
-                        <input name="pegLeg" className="ml-2" onChange={handleChange} type="checkbox" id="cbox1" />
+                        <input name="pegLeg" className="ml-2" onChange={handleCheckbox} type="checkbox" id="cbox1" />
                         <label htmlFor="cbox1">Peg Leg</label>
                     </div>
                     <div>
-                        <input className="ml-2" name="eyePatch" onChange={handleChange} type="checkbox" id="cbox2" />
+                        <input className="ml-2" name="eyePatch" onChange={handleCheckbox} type="checkbox" id="cbox2" />
                         <label htmlFor="cbox2">Eye Patch</label>
                     </div>
                     <div>
-                        <input className="ml-2" name="hookHand" onChange={handleChange} type="checkbox" id="cbox3" />
+                        <input className="ml-2" name="hookHand" onChange={handleCheckbox} type="checkbox" id="cbox3" />
                         <label htmlFor="cbox3">Hook Hand</label>
                     </div>
                     

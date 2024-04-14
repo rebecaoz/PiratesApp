@@ -1,8 +1,8 @@
 import React from 'react';
-
-
+import { useNavigate} from "react-router-dom";
 
 const ListPirates = (props) =>{
+    const navigate = useNavigate();
     
     return(
         <div>
@@ -12,7 +12,7 @@ const ListPirates = (props) =>{
                     <p className="title">{pirate.name}</p>
                     <div>{pirate.imageUrl}</div>
                     <div className="btn-group">
-                        <button className="btn">View Pirate</button>
+                        <button className="btn" onClick={()=>{navigate("/pirate/"+pirate._id)}}>View Pirate</button>
                         <button className="btn">Walk the Plank</button>
                     </div>
                 </div>
