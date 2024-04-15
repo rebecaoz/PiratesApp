@@ -7,18 +7,14 @@ const Details = () =>{
     const params = useParams();
     //console.log(params);
     const [result, setResult] = useState([]);
-    console.log(result.pegLeg)
+    //console.log(result.pegLeg)
     //const [pegLeg, setPegLeg] = useState();
-   // const [hookHand, setHookHand] = useState();
+    //const [hookHand, setHookHand] = useState(result.hookHand);
     //const [eyePatch, setEyePatch] = useState();
+    //console.log(pegLeg)
     
     
-    useEffect(()=>{
-        axios.get(`http://localhost:8000/api/pirate/${params.id}/`)
-            //.then(response=>console.log(response))
-             .then( response => setResult(response.data.result) )
-             .catch( err => console.log(err));
-    },[params.id])
+    
     
     /*
     const remove = () =>{
@@ -28,16 +24,31 @@ const Details = () =>{
         .then(navigate("/"))
         .catch( err => console.log(err));
     }*/
-    /*
-    const handleChange = (event) => {
-        //console.log(data);
-        if(pegLeg){
-            setPegLeg(false)
-        }else{
-            setPegLeg(true)
-        }
-    }*/
+    
+   
+    const handleClick = (event) => {
+        
+        setResult({
+            ...result,
+            [event.target.name]: event.target.value
+        })
+        
+        editPirate(result)
+    }
+  
+    const editPirate = (data) => {
+        
+        axios.put(`http://localhost:8000/api/pirate/${params.id}`,data)
+            .then((response) => { 
+                //console.log(response)  
+            })
+            .catch((error) => {
+                console.log(error)
+            },[params.id])
+        
+    }
 
+    editPirate(result)
     return (
         <div>
             <div>
@@ -51,15 +62,17 @@ const Details = () =>{
                     <h3>About</h3>
                     <p>Position: {result.crewPosition}</p>
                     <p>Treasures: {result.numOfTreasures}</p>
-                    <p>Peg Leg: {String(result.pegLeg)} </p>
-                   
-                    <p>Eye Patch:</p>
+                    <p>Peg Leg: {result.pegLeg ? "yes":"no"} </p>
                     {
-                        result.eyePatch ? <button>YES</button>:<button>NO</button>
+                        <button onClick={handleClick} name="pegLeg" value={!result.pegLeg}>{result.pegLeg? "NO":"YES"}</button>
                     }
-                    <p>Hook Hand:</p>
+                    <p>Eye Patch: {result.eyePatch? "yes":"no"}</p>
                     {
-                        result.hookHand ? <button>YES</button>:<button>NO</button>
+                        <button onClick={handleClick} name="eyePatch" value={!result.eyePatch}>{result.eyePatch? "NO":"YES"}</button>
+                    }
+                    <p>Hook Hand: {result.hookHand? "yes":"no"}</p>
+                    {
+                        <button onClick={handleClick} name="hookHand" value={!result.hookHand}>{result.hookHand? "NO":"YES"}</button>
                     }
                 </div>
             </div>
