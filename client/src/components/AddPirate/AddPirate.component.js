@@ -1,6 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate} from "react-router-dom";
+import './AddPirate.style.css'
+import { Col, Button, Row, Form } from "react-bootstrap";
+import InputGroup from 'react-bootstrap/InputGroup';
+
 
 const AddPirate = () =>{
     const [data, setData] = useState({})
@@ -18,15 +22,10 @@ const AddPirate = () =>{
         
         axios.post('http://localhost:8000/api/pirate/new',data )
             .then((response) => {
-                //console.log(data)
-                //console.log(response.data)
-                //getPets();
-                //setPets(response.data);  
             })
             .catch((error) => {
                 console.log(error)
             })
-        
     }
 
     const handleCheckbox = (event) => {
@@ -45,87 +44,96 @@ const AddPirate = () =>{
 
     
     return <div>
+        
         <div>
-            <h2 className="text-center">Add Pirate</h2>
-            <button onClick={()=>navigate(-1)}>Crew Board</button>
+            <h2 className="text-center m-4">Add Pirate</h2>
+            <Button onClick={()=>navigate(-1)}>Crew Board</Button>
         </div>
-        <div className="pd-5">
-            <form action="" onSubmit={handleSubmit}>
-                <div>
-                    <span>Pirate Name:</span>
-                    <input
+        <Row className="mt-4">
+            <Form action="" onSubmit={handleSubmit}>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="4" className='labels' >Pirate Name:</Form.Label>
+                    <Col sm="4">
+                        <Form.Control 
+                            type="text" 
+                            name="name" 
+                            value={data.name} 
+                            onChange={handleChange}  />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="4" className='labels'>Image Url:</Form.Label>
+                    <Col sm="4">
+                        <Form.Control
+                            type="text" 
+                            name="imageUrl" 
+                            value={data.imageUrl} 
+                            onChange={handleChange} 
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="4" className='labels'>Number of Treasures:</Form.Label>
+                    <Col sm="4">
+                        <Form.Control
+                            className="ml-2" 
+                            type="number" 
+                            name="numOfTreasures" 
+                            value={data.numOfTreasures} 
+                            onChange={handleChange} 
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="4" className="d-flex justify-content-end align-items-center labels">Pirate Catch Phrase:</Form.Label>
+                    <Col sm="4">
+                        <Form.Control
+                            className="" 
+                            type="text" 
+                            name="catchPhrase" 
+                            value={data.catchPhrase} 
+                            onChange={handleChange}
+                            as="textarea"
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="4" className='labels'>Crew Position:</Form.Label>
+                    <Col sm="2">
+                    <Form.Select 
                         className="ml-2" 
-                        type="text" 
-                        name="name" 
-                        value={data.name} 
-                        onChange={handleChange} 
-                    />
-                </div>
-                <div>
-                    <span>Image Url:</span>
-                    <input
-                        className="ml-2" 
-                        type="text" 
-                        name="imageUrl" 
-                        value={data.imageUrl} 
-                        onChange={handleChange} 
-                    />
-                </div>
-                <div>
-                    <span>Number of Treasures:</span>
-                    <input
-                        className="ml-2" 
-                        type="number" 
-                        name="numOfTreasures" 
-                        value={data.numOfTreasures} 
-                        onChange={handleChange} 
-                    />
-                </div>
-                <div>
-                    <span>Pirate Catch Phrase:</span>
-                    <input
-                        className="ml-2" 
-                        type="text" 
-                        name="catchPhrase" 
-                        value={data.catchPhrase} 
-                        onChange={handleChange} 
-                    />
-                </div>
-                <div>
-                    <span>Crew Position:</span>
-                    <select className="ml-2" 
                         type="text" 
                         name="crewPosition" 
                         value={data.crewPosition} 
-                        onChange={handleChange} 
-                    >
-                        <option>Captain</option>
-                        <option>First Mate</option>
-                        <option>Quarter Master</option>
-                        <option>Boatswain</option>
-                        <option>Powder Monkey</option>
-                    </select>
-                </div>
-                <div>
-                    <div>
-                        <input name="pegLeg" className="ml-2" onChange={handleCheckbox} type="checkbox" id="cbox1" />
-                        <label htmlFor="cbox1">Peg Leg</label>
-                    </div>
-                    <div>
-                        <input className="ml-2" name="eyePatch" onChange={handleCheckbox} type="checkbox" id="cbox2" />
-                        <label htmlFor="cbox2">Eye Patch</label>
-                    </div>
-                    <div>
-                        <input className="ml-2" name="hookHand" onChange={handleCheckbox} type="checkbox" id="cbox3" />
-                        <label htmlFor="cbox3">Hook Hand</label>
-                    </div>
+                        onChange={handleChange}>
+                            <option>Captain</option>
+                            <option>First Mate</option>
+                            <option>Quarter Master</option>
+                            <option>Boatswain</option>
+                            <option>Powder Monkey</option>
+                    </Form.Select>
+                    </Col>
+                </Form.Group>
+
+                <Form.Group className="m-3">
+                    <InputGroup className="mb-3 justify-content-center">
+                        <Form.Check inline name="pegLeg" className="" onChange={handleCheckbox} type="checkbox" id="cbox1" label="Pegleg"/>
+                       
+                        <Form.Check inline className="ml-2" name="eyePatch" onChange={handleCheckbox} type="checkbox" id="cbox2" label="Eyepatch"/>
                     
-                </div>
+                        <Form.Check inline className="ml-2" name="hookHand" onChange={handleCheckbox} type="checkbox" id="cbox3" label="Hook hand"/>
+                    </InputGroup>        
+                </Form.Group>
                 <div>
-                    <button type="submit">Add Pirate</button>
+                    <Button className="mt-4" type="submit">Add Pirate</Button>
                 </div>
-            </form>
-        </div>
+            </Form>
+        </Row>
+        
     </div>
 }
 export default AddPirate

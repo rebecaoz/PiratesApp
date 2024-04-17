@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate} from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 const ListPirates = (props) =>{
     const navigate = useNavigate();
@@ -12,8 +13,8 @@ const ListPirates = (props) =>{
                     <p className="title">{pirate.name}</p>
                     <div>{pirate.imageUrl}</div>
                     <div className="btn-group">
-                        <button className="btn" onClick={()=>{navigate("/pirate/"+pirate._id)}}>View Pirate</button>
-                        <button className="btn">Walk the Plank</button>
+                        <Button className="btn" onClick={()=>{navigate("/pirate/"+pirate._id)}}>View Pirate</Button>
+                        <Button className="btn">Walk the Plank</Button>
                     </div>
                 </div>
             </div>    

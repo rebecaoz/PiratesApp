@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import Button from 'react-bootstrap/Button';
 
 const Details = () =>{
     
     const params = useParams();
-    //console.log(params);
     const [result, setResult] = useState([]);
-    //console.log(result.pegLeg)
-    //const [pegLeg, setPegLeg] = useState();
-    //const [hookHand, setHookHand] = useState(result.hookHand);
-    //const [eyePatch, setEyePatch] = useState();
-    //console.log(pegLeg)
     
-    
+    useEffect(()=>{
+        axios.get(`http://localhost:8000/api/pirate/${params.id}/`)
+             
+             .then( response => setResult(response.data.result) )
+             .catch( err => console.log(err));
+    },[params.id])
     
     
     /*
@@ -52,7 +52,7 @@ const Details = () =>{
     return (
         <div>
             <div>
-                <h2>Deep Sea Davy</h2>
+                <h2>{result.name}</h2>
             </div>
             <div>
                 <div>
@@ -62,18 +62,24 @@ const Details = () =>{
                     <h3>About</h3>
                     <p>Position: {result.crewPosition}</p>
                     <p>Treasures: {result.numOfTreasures}</p>
-                    <p>Peg Leg: {result.pegLeg ? "yes":"no"} </p>
-                    {
-                        <button onClick={handleClick} name="pegLeg" value={!result.pegLeg}>{result.pegLeg? "NO":"YES"}</button>
-                    }
-                    <p>Eye Patch: {result.eyePatch? "yes":"no"}</p>
-                    {
-                        <button onClick={handleClick} name="eyePatch" value={!result.eyePatch}>{result.eyePatch? "NO":"YES"}</button>
-                    }
-                    <p>Hook Hand: {result.hookHand? "yes":"no"}</p>
-                    {
-                        <button onClick={handleClick} name="hookHand" value={!result.hookHand}>{result.hookHand? "NO":"YES"}</button>
-                    }
+                    <div>
+                        <p>Peg Leg: {result.pegLeg ? "yes":"no"} </p>
+                        {
+                            <Button onClick={handleClick} name="pegLeg" value={!result.pegLeg}>{result.pegLeg? "NO":"YES"}</Button>
+                        }
+                    </div>
+                    <div>
+                        <p>Eye Patch: {result.eyePatch? "yes":"no"}</p>
+                        {
+                            <Button onClick={handleClick} name="eyePatch" value={!result.eyePatch}>{result.eyePatch? "NO":"YES"}</Button>
+                        }
+                    </div>
+                    <div>
+                        <p>Hook Hand: {result.hookHand? "yes":"no"}</p>
+                        {
+                            <Button onClick={handleClick} name="hookHand" value={!result.hookHand}>{result.hookHand? "NO":"YES"}</Button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
