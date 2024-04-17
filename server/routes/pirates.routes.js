@@ -5,5 +5,5 @@ module.exports = app => {
     app.get("/api/pirate/:id", PirateController.findOnePirate);
     app.put("/api/pirate/:id", PirateController.updateExistingPirate);
     app.post("/api/pirate/new", PirateController.createPirate);
-    app.delete("/api/pets/delete/:id", PirateController.deleteAnExistingPirate);
+    app.delete("/api/pirate/delete/:id", PirateController.deleteAnExistingPirate);
 };

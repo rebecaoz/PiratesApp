@@ -15,17 +15,6 @@ const Details = () =>{
              .catch( err => console.log(err));
     },[params.id])
     
-    
-    /*
-    const remove = () =>{
-        axios.delete(`http://localhost:8000/api/pets/delete/${params.id}/`)
-        .then( response => setResult(response.data.result) )
-        .then(alert("Congratulatios. You got a pet"))
-        .then(navigate("/"))
-        .catch( err => console.log(err));
-    }*/
-    
-   
     const handleClick = (event) => {
         
         setResult({

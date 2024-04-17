@@ -11,7 +11,7 @@ const MainPage = (props) => {
     const [pirates, setPirates] = useState([]);
     const navigate = useNavigate();
    
-    const getPirates = () => {
+    useEffect(()=> {
         axios.get('http://localhost:8000/api/pirates')
             .then((response) => {
                 setPirates(response.data.pirates)
@@ -20,11 +20,9 @@ const MainPage = (props) => {
             .catch((error) => {
                 console.log(error)
             })
-    }
+    },)
 
-    useEffect(()=>{
-        getPirates(); 
-    },[])
+   
 
     const Ir = () =>{
         navigate("/new");
@@ -32,8 +30,8 @@ const MainPage = (props) => {
 
     return <div className="content">
         
-        <div>
-            <h1>Pirates Crew</h1>
+        <div className="d-flex d-flex justify-content-evenly m-4">
+            <h1 className="">Pirates Crew</h1>
             <Button variant="primary" onClick={Ir}>Add Pirate</Button>
         </div>
         
